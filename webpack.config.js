@@ -12,9 +12,15 @@ module.exports = (env, args) => {
             filename: production ? '[name].[contenthash].js' : '[name].[hash].js'
         },
         mode: 'development',
+        experiments: {
+            syncWebAssembly: true,
+        },
         plugins: [
             new htmlpack({
                 template: '/src/index.html'
+            }),
+            new wasmpack({
+                crateDirectory: path.resolve(__dirname, '.')
             }),
             new webpack.ProvidePlugin({
                 TextDecoder: ['text-encoding', 'TextDecoder'],
