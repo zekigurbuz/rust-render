@@ -13,7 +13,7 @@ module.exports = (env, args) => {
         },
         mode: 'development',
         experiments: {
-            syncWebAssembly: true,
+            asyncWebAssembly: true,
         },
         plugins: [
             new htmlpack({
