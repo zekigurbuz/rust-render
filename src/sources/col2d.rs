@@ -49,9 +49,9 @@ impl Col2D {
             GL::STATIC_DRAW);
 
         Self {
-            col: gl.get_uniform_location(&program, "uColor").unwrap(),
-            opac: gl.get_uniform_location(&program, "uOpacity").unwrap(),
-            trans: gl.get_uniform_location(&program, "uTransform").unwrap(),
+            col: gl.get_uniform_location(&program, "col").unwrap(),
+            opac: gl.get_uniform_location(&program, "opac").unwrap(),
+            trans: gl.get_uniform_location(&program, "trans").unwrap(),
             num_vert: rect.len(),
             buffer: rect_buffer,
             source: program

@@ -8,6 +8,9 @@ rust.then(m => {
         return;
     }
 
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
     const FPS = 30.0;
     const BUFFER = 1000.0 / FPS;
     const CLIENT = new m.Client();
@@ -21,6 +24,7 @@ rust.then(m => {
         const curTime = Date.now();
         if (curTime >= prevTime + BUFFER) {
             prevTime = curTime;
+            console.log("HI");
 
             if (window.innerHeight != canvas.height ||
                 window.innerWidth != canvas.width) {
