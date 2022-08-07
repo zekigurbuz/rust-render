@@ -65,7 +65,7 @@ impl Col2D {
         gl.bind_buffer(GL::ARRAY_BUFFER, Some(&self.buffer));
         gl.vertex_attrib_pointer_with_i32(0, 2, GL::FLOAT, false, 0, 0);
         gl.enable_vertex_attrib_array(0);
-        gl.uniform4f(Some(&self.col), 0.0, 0.5, 0.5, 1.0);
+        gl.uniform4f(Some(&self.col), 1.0, 0.5, 0.5, 1.0);
         gl.uniform1f(Some(&self.opac), 1.0);
 
         let translation = utils::translation(
