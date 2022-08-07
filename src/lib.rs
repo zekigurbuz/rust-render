@@ -17,7 +17,7 @@ extern "C" {
 #[wasm_bindgen]
 pub struct Client {
     gl: WebGlRenderingContext,
-    2dcol_program: sources::2DCol,
+    col2d_program: sources::Col2D,
 }
 
 #[wasm_bindgen]
@@ -27,7 +27,7 @@ impl Client {
         console_error_panic_hook::set_once();
         let gl = setup::initialize().unwrap();
         Self {
-            2dcol_program: sources::2DCol::new(&gl),
+            col2d_program: sources::Col2D::new(&gl),
             gl: gl,
         }
     }
@@ -38,6 +38,6 @@ impl Client {
 
     pub fn render(&self) {
         self.gl.clear(GL::COLOR_BUFFER_BIT | GL::DEPTH_BUFFER_BIT);
-        self.2DCol.render(&self.gl, 0.0, 10.0, 0.0, 10.0, 10.0, 10.0);
+        self.col2d_program.render(&self.gl, 0.0, 10.0, 0.0, 10.0, 10.0, 10.0);
     }
 }

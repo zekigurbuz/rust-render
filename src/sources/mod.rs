@@ -1,2 +1,2 @@
-mod 2dcol;
-pub use 2dcol::*;
+mod col2d;
+pub use col2d::*;

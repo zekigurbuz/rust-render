@@ -1,10 +1,10 @@
-use wasm_bindgen::JsCase;
+use wasm_bindgen::JsCast;
 use web_sys::*;
 use web_sys::WebGlRenderingContext as GL;
 use js_sys::WebAssembly;
 use super::super::utils as utils;
 
-pub struct 2DCol {
+pub struct Col2D {
     source: WebGlProgram,
     num_vert: usize,
     buffer: WebGlBuffer,
@@ -13,21 +13,21 @@ pub struct 2DCol {
     trans: WebGlUniformLocation,
 }
 
-impl 2DCol {
+impl Col2D {
     pub fn new(gl: &WebGlRenderingContext) -> Self {
         let program = utils::link(
             &gl,
-            super::super::shaders::vertex::2dcol::SHADER,
-            super::super::shaders::fragment::2dcol::SHADER)
+            super::super::shaders::vertex::col2d::SHADER,
+            super::super::shaders::fragment::col2d::SHADER)
                 .unwrap();
 
-        let rect: [f32, 12] = [
+        let rect: [f32; 12] = [
             0.0, 1.0,
             0.0, 0.0,
             1.0, 1.0,
-            1.0, 1.0
+            1.0, 1.0,
             0.0, 0.0,
-            1,0, 0,0
+            1.0, 0.0
         ];
         let rect_ptr = rect.as_ptr() as u32 / 4;
 
@@ -58,10 +58,10 @@ impl 2DCol {
         }
     }
 
-    pub fn render(&self, gl: &WebGLRenderingContext,
+    pub fn render(&self, gl: &WebGlRenderingContext,
                   bottom: f32, top: f32, left: f32, right: f32,
                   height: f32, width: f32) {
-        gl.use_program(&self.source);
+        gl.use_program(Some(&self.source));
         gl.bind_buffer(GL::ARRAY_BUFFER, Some(&self.buffer));
         gl.vertex_attrib_pointer_with_i32(0, 2, GL::FLOAT, false, 0, 0);
         gl.enable_vertex_attrib_array(0);
@@ -81,6 +81,6 @@ impl 2DCol {
         let transform = utils::mult(scale, translation);
         gl.uniform_matrix4fv_with_f32_array(
             Some(&self.trans), false, &transform);
-        gl.draw_arrays(GL::TRIANGLES, 0, (self.num_verts / 2) as i32);
+        gl.draw_arrays(GL::TRIANGLES, 0, (self.num_vert / 2) as i32);
     }
 }

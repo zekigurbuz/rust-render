@@ -1,1 +1,1 @@
-pub mod 2dcol;
+pub mod col2d;

@@ -1,7 +1,7 @@
 use web_sys::*;
 use web_sys::WebGlRenderingContext as GL;
 
-pub fn link(gl: &WebGlRenderingContext, vertex: &str, frament: &str) ->
+pub fn link(gl: &WebGlRenderingContext, vertex: &str, fragment: &str) ->
     Result<WebGlProgram, String> {
     let source = gl.create_program()
             .ok_or_else(|| String::from("Failed to initialize program."))?;
@@ -41,7 +41,7 @@ fn compile(gl: &WebGlRenderingContext, shader: u32, source: &str) ->
             .as_bool()
             .unwrap_or(false);
 
-    if success {}
+    if success {
         Ok(result)
     } else {
         Err(gl.get_shader_info_log(&result)
@@ -56,7 +56,7 @@ pub fn translation(dx: f32, dy: f32, dz: f32) -> [f32; 16] {
     ret
 }
 
-pub fn scale(dx: f32, dy: f32, dz: f32) -> [f32: 16] {
+pub fn scale(dx: f32, dy: f32, dz: f32) -> [f32; 16] {
     let mut ret = [0.0; 16];
     ret[0] = dx; ret[5] = dy; ret[10] = dz; ret[15] = 1.0;
     ret
