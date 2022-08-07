@@ -24,7 +24,6 @@ rust.then(m => {
         const curTime = Date.now();
         if (curTime >= prevTime + BUFFER) {
             prevTime = curTime;
-            console.log("HI");
 
             if (window.innerHeight != canvas.height ||
                 window.innerWidth != canvas.width) {
